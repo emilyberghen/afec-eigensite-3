@@ -1,0 +1,14 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+	<h2>{{ title }}</h2>
+	{{ content | safe }}
+	<ul class="blog">
+  	{% for item in pagination.items %}
+    <li>
+    	<a href="{{ item.url }}">{{ item.data.title }}</a>
+    </li>
+    {% endfor %}
+   </ul>
+	 {% include "partials/pagination.html" %}
+{% endblock %}

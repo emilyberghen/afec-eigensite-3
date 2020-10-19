@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+
+{% set postListItems = collections[tag] %}
+{% set title = 'Blog posts filed under “' + tag + '”' %}
+
+{% block content %}
+    	<h2>{{ title }}</h2>
+			{{ content | safe }}
+			<ul class="blog">
+		  	{% for item in postListItems %}
+		    <li>
+		    	<a href="{{ item.url }}">{{ item.data.title }}</a>
+		    </li>
+		    {% endfor %}
+		   </ul>
+{% endblock %}

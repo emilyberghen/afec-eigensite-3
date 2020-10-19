@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+ 	<h3>Blogpost: {{title }}</h3>
+	<time datetime="{{ date | w3DateFilter }}">{{ date | dateFilter }}</time>
+  {{ content | safe }}
+	<p>Deze post werd gepubliceerd op {{ date  }}.</p>
+	{% if tags %}
+    <p class="visually-hidden" id="tags-desc">Tags that this post has been filed under.</p>
+    <ul class="tags-list" aria-describedby="tags-desc">
+      {% for tag in tags %}
+        <li>
+          <a href="/tag/{{ tag | slug }}/">{{ tag | title | replace(' ', '') }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
+
+{% set recommendedPosts = helpers.getSiblingContent(collections.blog, page) %}
+{% if recommendedPosts %}
+		<h2>Een andere interessante post...</h2>
+		<ul class="blog">
+	  	{% for item in recommendedPosts %}
+	    <li>
+	    	<a href="{{ item.url }}">{{ item.data.title }}</a>
+	    </li>
+	    {% endfor %}
+	   </ul>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+<h1><a href="{{ site.url }}">{{ site.name }}</a></h1>
+
+<nav>
+	<ul>
+	  {% for item in navigatie.items %}
+	  <li>
+	    <a href="{{ item.url }}" {{ helpers.getLinkActiveState(item.url, page.url) | safe }}>{{ item.text }}</a>
+	  </li>
+	  {% endfor %}
+	</ul>
+</nav>
